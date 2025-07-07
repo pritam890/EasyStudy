@@ -1,18 +1,55 @@
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { assets } from '../assets/assets';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
-function Navbar() {
+const Navbar = () => {
+  const navigate = useNavigate();
+  const {isGenerated,results} = useContext(AppContext);
+
   return (
-    <nav className="bg-purple-700 text-white p-4 shadow-lg flex justify-between items-center">
-      <h1 className="text-2xl font-bold">EasyStudy</h1>
-      <div className="space-x-4">
-        <Link to="/" className="hover:underline">Home</Link>
-        <Link to="/upload" className="hover:underline">Generate</Link>
-        <Link to="/summary-mcqs" className="hover:underline">Result</Link>
-        <Link to="/question-answering" className="hover:underline">Q&A</Link>
-        <Link to="/tutorials" className="hover:underline">Tutorials</Link>
+    <div className="flex items-center justify-between px-6 py-4 ">
+      
+      {/* Logo */}
+      <Link to="/">
+        <img
+          src={assets.my_logo2}
+          alt="Logo"
+          className="w-24 sm:w-32 lg:w-40 object-contain"
+        />
+      </Link>
+
+      {/* Navigation Buttons */}
+      <div className="flex items-center gap-3 sm:gap-6">
+        <Link
+          to="/"
+          className="text-gray-600 hover:text-indigo-600 font-medium text-sm sm:text-base"
+        >
+          Home
+        </Link>
+        
+        {isGenerated && <button
+          onClick={() => navigate('/summary-mcqs')}
+          className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition duration-300"
+        >
+          Summary & MCQ
+        </button>}
+        {isGenerated && <button
+          onClick={() => navigate('/question-answering')}
+          className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition duration-300"
+        >
+          Q&A
+        </button>}
+        {isGenerated && <button
+          onClick={() => navigate('/tutorials')}
+          className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition duration-300"
+        >
+          Tutorials
+        </button>}
       </div>
-    </nav>
+      
+    </div>
   );
-}
+};
 
 export default Navbar;

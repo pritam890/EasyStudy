@@ -1,15 +1,14 @@
-import Header from '../components/Header';
-import Description from '../components/Description';
-import Generate from '../components/Generate';
+import React from 'react'
+import Header from '../components/Header'
+import Testimonials from '../components/Testimonials'
 
-function Home() {
+const Home = () => {
   return (
     <div>
-      <Header />
-      <Description />
-      <Generate />
+      <Header/>
+      <Testimonials/>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
